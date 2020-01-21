@@ -1,1 +1,0 @@
-# CAPTURE2.0_sgRNA_design

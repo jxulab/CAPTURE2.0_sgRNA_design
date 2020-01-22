@@ -176,3 +176,13 @@ output:
 
 useful_sgRNA.txt
 
+There are five columns in the output sgRNA_count.txt file. The first colum is sgRNA chromosome coordinates. The second column is sgRNA score. The third column is sgRNA sequence. The fourth column is The fifthe column is the rank
+
+Here are a few lines of output:
+
+chr16:85361804-85361904;100	0.9021267	AGCCCCCAGACGGGGCGAAAGGG	104	1
+chr16:85364331-85364381;50	0.783757	GACATTTATCCAAGAGGGGCAGG	115	1
+chr16:85368278-85368378;100	0.7807476	CTTGAGCCCCCACATTTAGGGGG	130	1
+chr16:85392837-85392937;100	0.9381734	AGGAGGACGCATCGCCAAACAGG	55	1
+
+

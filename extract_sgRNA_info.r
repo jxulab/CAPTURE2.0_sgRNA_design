@@ -2,6 +2,7 @@
 
 args = commandArgs(TRUE)
 name = args[1]
+
 data=read.table(paste(name,'.txt',sep=""),header=F,sep="\t",skip=27,comment.char="")
 L=dim(data)[1]-2
 Enhancer=sapply(strsplit(as.vector(data[seq(1,L,2),1])," "),function(x) x[2])

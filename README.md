@@ -7,14 +7,19 @@ This site hosts the Xu lab's CRISPR sgRNA design batch analysis.These scripts ar
 Example Usage
 
 
+oligoMatch $work_dir/Dpnii.fa $ref_dir/hg19.fasta $work_dir/dpnii_cut_site.bed
+
 Rscript exclude_dpnii.r "target_region" "dpnii_cut_site"
 
 
 input: 
 
-target_region.bed # bed file with three columns
+target_region.bed   bed file with three columns
 
-dpnii_cut_site.bed # bed file with three columns. Supplied in this site
+hg19.fasta   human reference fasta file. download from https://hgdownload.soe.ucsc.edu/goldenPath/hg19/bigZips/
+
+Dpnii.fa supplied in this site
+
 
 output:
 
@@ -45,9 +50,17 @@ rm temp.fasta
 done
 
 
-input: target_region_exclude_dpnii$i.bed from step 1
+input: 
 
-output: fasta files target_region_exclude_dpnii$i.fa
+
+target_region_exclude_dpnii$i.bed from step 1
+
+hg19.fasta human reference fasta file. download from https://hgdownload.soe.ucsc.edu/goldenPath/hg19/bigZips/
+
+
+output: 
+
+fasta files target_region_exclude_dpnii$i.fa
 
 
 
@@ -56,6 +69,7 @@ output: fasta files target_region_exclude_dpnii$i.fa
 
 
 4 Extract the sgRNA information.
+
 
 Example Usage
 
@@ -73,9 +87,16 @@ rm *.data *.html *.json
 
 done
 
-input: Optimized_CRISPR_Design$j.txt from step 3
 
-output: Optimized_CRISPR_Design${i}_output.txt
+input:
+
+
+Optimized_CRISPR_Design$j.txt from step 3
+
+
+output:
+
+Optimized_CRISPR_Design${i}_output.txt
 
 
 
@@ -95,7 +116,8 @@ Example Usage
 
 cat target_region_exclude_dpnii1.bed target_region_exclude_dpnii2.bed ... > target_region_exclude_dpnii.bed
 
-bedtools intersect -loj -a target_region_exclude_dpnii.bed -b merged_RepeatMasker.bed > target_region_exclude_dpnii_olp_RepeatMasker.bed
+ 
+bedtools intersect -loj -a target_region_exclude_dpnii.bed -b <(bedtools merge RepeatMasker.bed) > target_region_exclude_dpnii_olp_RepeatMasker.bed
 
 Rscript target_region_overlap_repeatmasker.r 'target_region_exclude_dpnii_olp_RepeatMasker'
 
@@ -104,7 +126,7 @@ input:
 
 target_region_exclude_dpnii$i.bed from step 1
 
-merged_RepeatMasker.bed Supplied in this site
+RepeatMasker.bed  download http://genome.ucsc.edu/cgi-bin/hgTables. 
 
 
 output:
@@ -123,7 +145,7 @@ bedtools getfasta -tab -fi hg19.fasta -bed target_region_exclude_dpnii_olp_Repea
 
 input:
 
-hg19.fasta  human reference fasta file
+hg19.fasta  human reference fasta file.
 
 target_region_exclude_dpnii_olp_RepeatMasker_output.bed from step 6
 

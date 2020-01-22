@@ -2,6 +2,7 @@
 
 args = commandArgs(TRUE)
 name = args[1]
+m = args[2]
 
 peaks=read.table(paste(name,'.txt',sep=""),header=F,sep="\t")
 dpnii=read.table('dpnii_cut_site.bed',header=F,sep="\t")
@@ -34,5 +35,9 @@ for (i in 1:dim(peaks)[1]){
 	}
 	nearest_bed[(2*i-1):(2*i),]=rbind(nearest_bed_up,nearest_bed_down)
 }
-write.table(nearest_bed,paste(name,'_output.txt',sep=""),col.names=F,row.names=F,sep="\t",quote=F)
 
+nearest_bed[,4]=paste(nearest_bed[,1],":",nearest_bed[,2],"-",nearest_bed[,3],";",nearest_bed[,4],sep="")
+for (i in 1:(ceiling(dim(nearest_bed)[1]/m))){
+	nearest_bed_spe=nearest_bed[((i-1)*m+1):min(i*m,dim(nearest_bed)[1]),]
+	write.table(nearest_bed_spe,paste(name,'_output_',i,'.bed',sep=""),col.names=F,row.names=F,sep="\t",quote=F)
+}

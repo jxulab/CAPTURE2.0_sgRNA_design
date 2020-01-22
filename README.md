@@ -25,6 +25,7 @@ target_region_exclude_dpnii2.bed
 ...
 
 
+
 2 Convert bed file to fasta file.
 
 Example Usage
@@ -49,7 +50,9 @@ input: target_region_exclude_dpnii$i.bed from step 1
 output: fasta files target_region_exclude_dpnii$i.fa
 
 
+
 3 Submit fasta files target_region_exclude_dpnii$i.fa to http://crispor.tefor.net/ to get the candidate sgRNA, save the websites as Optimized_CRISPR_Design$i.txt.
+
 
 
 4 Extract the sgRNA information.
@@ -75,11 +78,13 @@ input: Optimized_CRISPR_Design$j.txt from step 3
 output: Optimized_CRISPR_Design${i}_output.txt
 
 
+
 5 Merge N output tables. 
 
 Example Usage
 
 cat *_output.txt > all_sgRNA_info.txt
+
 
 
 6 Get the overlapped region between target regions and repeat masker.
@@ -107,6 +112,8 @@ output:
 target_region_exclude_dpnii_olp_RepeatMasker_output.bed
 
 
+
+
 7 Get the overlapped sequences between target regions and repeat masker.
 
 Example Usage
@@ -126,16 +133,21 @@ output:
 target_region_exclude_dpnii_olp_RepeatMasker_output_sequence.txt
 
 
+
+
 8 Select top scored sgRNA which don't overlap with repeatmasker.
 
 Example Usage
 
-Rscript select_top_scored_sgRNA_not_overlap_reapeatmasker.r 'target_region_exclude_dpnii_olp_RepeatMasker_output_sequence' 'all_sgRNA_info.txt'
+Rscript select_top_scored_sgRNA_not_overlap_reapeatmasker.r 'target_region_exclude_dpnii_olp_RepeatMasker_output_sequence' 'all_sgRNA_info'
 
 
 input:
 
 target_region_exclude_dpnii_olp_RepeatMasker_output_sequence.txt from step7
+
+all_sgRNA_info.txt from step 5
+
 
 
 output:

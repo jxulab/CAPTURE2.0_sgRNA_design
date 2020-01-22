@@ -7,12 +7,17 @@ Example Usage
 Rscript exclude_dpnii.r "target_region" "dpnii_cut_site"
 
 input: 
+
 target_region.bed # bed file with three columns
+
 dpnii_cut_site.bed # bed file with three columns. Supplied in this site
 
 output:
+
 target_region_exclude_dpnii1.bed
+
 target_region_exclude_dpnii2.bed
+
 ...
 
 2 Convert bed file to fasta file.
